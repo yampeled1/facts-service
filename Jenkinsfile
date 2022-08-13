@@ -50,7 +50,7 @@ spec:
           }
         container('helm') {
           sh """
-            helm install --dry-run --namespace ma-services services services
+            helm upgrade --namespace ma-services services services --set image.repo=europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/facts-service --set image.tag=${$BUILD_NUMBER}
           """
           }
         }
