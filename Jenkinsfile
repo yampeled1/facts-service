@@ -39,8 +39,7 @@ spec:
         container('docker') {
           sh """
             docker build -t time-service:$BUILD_NUMBER .
-            ls -la /etc/secret
-            cat /etc/secret/gcr-creds.json | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
+            cat /etc/secret/gcr-creds.json | docker login -u _json_key --password-stdin https://europe-west2-docker.pkg.dev
           """
           }
         }
