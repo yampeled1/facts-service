@@ -20,26 +20,30 @@ spec:
     volumeMounts:
     - mountPath: /var/run/docker.sock
       name: docker-sock
+    - name: docker-creds
+      mountPath: /etc/secret
+      readOnly: true
   volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
+    - name: docker-creds
+      secret:
+        secretName: gcr-creds
 """
     }
   }
   stages {
     stage('Build') {
-      withCredentials([usernamePassword(credentialsId: 'docker-creds',
-                      usernameVariable: 'USER', 
-                      passwordVariable: 'PASS')]) {
       steps {
         container('docker') {
           sh """
             docker build -t time-service:$BUILD_NUMBER .
+            ls -la /etc/secret
+            cat key.json | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
           """
           }
         }
-      }
     }
   }
 }
