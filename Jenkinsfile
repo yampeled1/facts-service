@@ -12,6 +12,11 @@ labels:
 spec:
   serviceAccountName: yamp-jenkins
   containers:
+  - name: helm
+    image: alpine:3.16
+    command:
+    - cat
+    tty: true
   - name: docker
     image: docker:latest
     command:
@@ -30,11 +35,6 @@ spec:
     - name: docker-creds
       secret:
         secretName: gcr-creds
-  - name: helm
-    image: alpine:3.16
-    command:
-    - cat
-    tty: true
 """
     }
   }
