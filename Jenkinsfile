@@ -8,7 +8,7 @@ podTemplate(label: 'service-demo', cloud: 'kubernetes', serviceAccount: 'yamp-je
     secretVolume(secretName: 'docker-hub-credentials', mountPath: '/etc/.secret'),
     hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
   ]) {
-    node('demo-customer-pod') {
+    node('service-demo') {
         stage('Build Docker Image') {
             container('docker') {
                 sh """
