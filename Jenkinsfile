@@ -5,7 +5,7 @@ podTemplate(label: 'service-demo', cloud: 'kubernetes', serviceAccount: 'yamp-je
     ])
   ],
   volumes: [
-    secretVolume(secretName: 'docker-hub-credentials', mountPath: '/etc/.secret'),
+    secretVolume(secretName: 'docker-creds', mountPath: '/etc/.secret'),
     hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
   ]) {
     node('service-demo') {
