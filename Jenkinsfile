@@ -13,7 +13,7 @@ spec:
   serviceAccountName: yamp-jenkins
   containers:
   - name: helm
-    image: alpine:3.16
+    image: alpine/helm:3.9.1
     command:
     - cat
     tty: true
@@ -50,7 +50,6 @@ spec:
           }
         container('helm') {
           sh """
-            curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
             helm install --dry-run --namespace ma-services services services
           """
           }
