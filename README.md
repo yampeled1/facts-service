@@ -26,6 +26,8 @@ Navigate to new item -> choose pipeline name -> Multibranch pipeline -> ok
 
 In the pipeline configuration under Branch sources -> git -> add the *REPO URL* and add credentials for pulling the code
 
+In the Jenkinsfile, change the SA on line 13 to [release-name]-jenkins and change the remote-registry on lines 46,48 to your registry
+
 ### Cluster Prerequisites
 For authenticating against GCR create IAM role with sufficient permissions to push & pull from the registry, create and download locally the SA and create k8s secret with it's data:
 ```
