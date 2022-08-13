@@ -40,7 +40,7 @@ spec:
           sh """
             docker build -t time-service:$BUILD_NUMBER .
             ls -la /etc/secret
-            cat key.json | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
+            cat gcr-creds | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
           """
           }
         }
