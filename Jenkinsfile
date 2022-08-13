@@ -29,7 +29,7 @@ spec:
         path: /var/run/docker.sock
     - name: docker-creds
       secret:
-        secretName: gcr-creds
+        secretName: gcr-creds.json
 """
     }
   }
@@ -39,7 +39,7 @@ spec:
         container('docker') {
           sh """
             docker build -t time-service:$BUILD_NUMBER .
-            cat /etc/secret/gcr-creds | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
+            cat /etc/secret/gcr-creds.json | docker login -u _json_key_base64 --password-stdin https://europe-west2-docker.pkg.dev
           """
           }
         }
