@@ -30,6 +30,11 @@ spec:
     - name: docker-creds
       secret:
         secretName: gcr-creds
+  - name: helm
+    image: alpine/helm:3.9.3
+    command:
+    - cat
+    tty: true
 """
     }
   }
@@ -41,6 +46,11 @@ spec:
             docker build -t europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/facts-service:$BUILD_NUMBER .
             cat /etc/secret/gcr-creds.json | docker login -u _json_key --password-stdin https://europe-west2-docker.pkg.dev
             docker push europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/facts-service:$BUILD_NUMBER
+          """
+          }
+        container('helm') {
+          sh """
+            helm install --dry-run --namespace ma-services services services
           """
           }
         }
