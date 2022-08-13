@@ -40,7 +40,7 @@ spec:
           sh """
             docker build -t europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/time-service:$BUILD_NUMBER .
             cat /etc/secret/gcr-creds.json | docker login -u _json_key --password-stdin https://europe-west2-docker.pkg.dev
-            docker push europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/time-service:$BUILD_NUMBER .
+            docker push europe-west2-docker.pkg.dev/yamp-playground/yamp-registry/time-service:$BUILD_NUMBER
           """
           }
         }
