@@ -23,7 +23,7 @@ spec:
     - name: docker-creds
       mountPath: /etc/secret
       readOnly: true
-    volumes:
+  volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
@@ -31,7 +31,7 @@ spec:
       secret:
         secretName: gcr-creds
   - name: helm
-    image: alpine/helm:3.9.3
+    image: alpine:3.16
     command:
     - cat
     tty: true
@@ -50,6 +50,7 @@ spec:
           }
         container('helm') {
           sh """
+            curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | sh
             helm install --dry-run --namespace ma-services services services
           """
           }
