@@ -23,7 +23,7 @@ spec:
     - name: docker-creds
       mountPath: /etc/secret
       readOnly: true
-  volumes:
+    volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
